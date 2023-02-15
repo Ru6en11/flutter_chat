@@ -65,4 +65,16 @@ io.on("connection", io => {
         inCallback(rooms);
     });
 
+    /** join in room handler */
+    io.on("join", (inData, inCallback) => {
+        const room = rooms[inData.roomName];
+        if (Object.keys(room.users).length >= room.maxPeople) {
+            inCallback({ status : "full" });
+        } else {
+            room.users[inData.userName] = users[inData.userName];
+            io.broadcast.emit("joined", room);
+            inCallback({ status : "joined", room : room });
+        }
+    });
+
 }); //connection handler
