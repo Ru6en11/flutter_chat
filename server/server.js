@@ -21,3 +21,8 @@ const io = require('socket.io')(require('http')
         function(){}
     ).listen(8000)
 );
+
+io.on("connection", io => {
+    console.log("Connection established with a client");
+
+}); //connection handler
