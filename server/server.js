@@ -25,4 +25,21 @@ const io = require('socket.io')(require('http')
 io.on("connection", io => {
     console.log("Connection established with a client");
 
+    io.on("validate", (inData, inCallback) => {
+
+        const user = users[inData.userName];
+        if (user) {
+            if (user.password === inData.password) {
+                inCallback({ status : "ok"});
+            } else {
+                inCallback({ status : "fail" });
+            }
+        } else {
+            user[inData.userName] = inData;
+            io.broadcast.emit("newUser", users);
+            inCallback({ status : "created" });
+        }
+
+    });
+
 }); //connection handler
