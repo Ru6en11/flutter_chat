@@ -76,5 +76,15 @@ io.on("connection", io => {
             inCallback({ status : "joined", room : room });
         }
     });
+    
+    /**
+     * invate users handler 
+     * the message is sent to all users,
+     * and those whose name is specified in inData respond
+    */
+    io.on("invate", (inData, inCallback) => {
+        io.broadcast.emit("invated", inData);
+        inCallback({ status : "ok" });
+    });
 
 }); //connection handler
