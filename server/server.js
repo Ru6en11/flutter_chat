@@ -105,4 +105,16 @@ io.on("connection", io => {
         inCallback(rooms);
     });
 
+    /** 
+     * kick bad user from room handler :) 
+     * Administrators function, only room creator can used it
+    */
+    io.on("kick", (inData, inCallback) => {
+        const room = rooms[inData.roomName];
+        const users = room.users;
+        delete users[imData.userName];
+        io.broadcast.emit("kicked", room);
+        inCallback({ status : "ok" });
+    });
+
 }); //connection handler
