@@ -41,6 +41,11 @@ io.on("connection", io => {
         }
 
     });
+
+    /** show users handler */
+    io.on(" listUsers", (inData, inCallback) => {
+        inCallback({users});
+    });
     
     /** create room handler */
     io.on("create", (inData, inCallback) => {
