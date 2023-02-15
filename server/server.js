@@ -87,4 +87,12 @@ io.on("connection", io => {
         inCallback({ status : "ok" });
     });
 
+    /** leave room handler */
+    io.on("leave", (inData, inCallback) => {
+        const room = rooms[inData.roomName];
+        delete room.users[inData.userName];
+        io.broadcast.emit('left', room);
+        inCallback({ status : "ok"});
+    });
+
 }); //connection handler
