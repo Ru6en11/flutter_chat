@@ -95,4 +95,14 @@ io.on("connection", io => {
         inCallback({ status : "ok"});
     });
 
+    /**
+     * close room handler
+     * Administrators function, only room creator can used it 
+     */
+    io.on("close", (inData, inCallback) => {
+        delete rooms[inData.roomName];
+        io.broadcast.emit("closed", { roomName : inData.roomName, rooms : rooms });
+        inCallback(rooms);
+    });
+
 }); //connection handler
