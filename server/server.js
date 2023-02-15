@@ -118,3 +118,5 @@ io.on("connection", io => {
     });
 
 }); //connection handler
+
+console.log("Server started");
