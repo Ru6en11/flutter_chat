@@ -55,4 +55,9 @@ io.on("connection", io => {
         }
     });
 
+    /** show rooms handler */
+    io.on("listRooms", (inData, inCallback) => {
+        inCallback(rooms);
+    });
+
 }); //connection handler
