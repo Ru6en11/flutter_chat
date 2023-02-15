@@ -41,5 +41,18 @@ io.on("connection", io => {
         }
 
     });
+    
+    /** create room handler */
+    io.on("create", (inData, inCallback) => {
+
+        if (rooms[inData.roomName]) {
+            inCallback({ status : "exists" });
+        } else {
+            inData.users = {};
+            rooms[inData.roomName] = inData;
+            io.broadcast.emit("created", rooms);
+            inCallback({ status : "created", rooms : rooms });
+        }
+    });
 
 }); //connection handler
