@@ -19,5 +19,5 @@ const rooms = {};
 const io = require('socket.io')(require('http')
     .createServer(
         function(){}
-    ).listen(80)
+    ).listen(8000)
 );
